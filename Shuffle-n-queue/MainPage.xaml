@@ -100,7 +100,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="0"/>
+                        <RowDefinition Height="80"/>
                         <RowDefinition Height="100"/>
                     </Grid.RowDefinitions>
 
@@ -111,6 +111,12 @@
                     <TextBlock Name="TrackRemainingTimeText" Text="0:00" Grid.Row="1" Margin="12,40,12,0" HorizontalAlignment="Right"/>
                     <Slider Name="TrackSlider" Grid.Row="1" Value="0" Maximum="1" Margin="0,0,0,0"/>-->
 
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Name="SongText"/>
+                        <TextBlock Name="ArtistText"/>
+                        <TextBlock Name="AlbumText"/>
+                    </StackPanel>
+                    
                     <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
                         <Button Name="Prev" Click="Prev_Click">
                             <Image Source="Assets/Buttons/transport.rew.png"/>

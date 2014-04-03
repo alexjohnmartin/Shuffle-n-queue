@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
+using System.Threading;
 
 namespace Shuffle_n_queue
 {
@@ -22,6 +23,18 @@ namespace Shuffle_n_queue
 
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
+            //MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
+            //MediaPlayer.ActiveSongChanged += MediaPlayer_ActiveSongChanged;
+        }
+
+        private void MediaPlayer_ActiveSongChanged(object sender, EventArgs e)
+        {
+            //UpdatePlayerDisplay(); 
+        }
+
+        private void MediaPlayer_MediaStateChanged(object sender, EventArgs e)
+        {
+            //UpdatePlayerButtons();
         }
 
         // Load data for the ViewModel Items
@@ -33,6 +46,14 @@ namespace Shuffle_n_queue
             }
 
             UpdatePlayerButtons();
+            UpdatePlayerDisplay(MediaPlayer.Queue.ActiveSong); 
+        }
+
+        private void UpdatePlayerDisplay(Song song)
+        {
+            SongText.Text = song.Name;
+            AlbumText.Text = song.Album.Name;
+            ArtistText.Text = song.Artist.Name;
         }
 
         private void UpdatePlayerButtons()
@@ -49,7 +70,7 @@ namespace Shuffle_n_queue
             }
             else
             {
-                Play.Visibility = System.Windows.Visibility.Collapsed;
+                Play.Visibility = System.Windows.Visibility.Visible;
                 Pause.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
@@ -71,6 +92,7 @@ namespace Shuffle_n_queue
 
             if (index < App.ViewModel.AllSongs.Count())
             {
+                UpdatePlayerDisplay(selectedSong); 
                 FrameworkDispatcher.Update(); 
                 MediaPlayer.Play(App.ViewModel.AllSongs, index);
                 MediaPlayer.IsShuffled = true;
@@ -109,18 +131,26 @@ namespace Shuffle_n_queue
         public void EmailButton_Click(object sender, EventArgs e)
         {
             var email = new EmailComposeTask();
-            email.Subject = "Feedback for the Calendar Tile application";
+            email.Subject = "Feedback for the Shuffle'n'queue application";
             email.Show();
         }
 
         private void Prev_Click(object sender, RoutedEventArgs e)
         {
+            var index = MediaPlayer.Queue.ActiveSongIndex;
+            index--;
+            if (index < 0) index = MediaPlayer.Queue.Count - 1; 
+            UpdatePlayerDisplay(MediaPlayer.Queue[index]); 
             FrameworkDispatcher.Update(); 
             MediaPlayer.MovePrevious();
         }
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
+            var index = MediaPlayer.Queue.ActiveSongIndex;
+            index++;
+            if (index >= MediaPlayer.Queue.Count) index = 0;
+            UpdatePlayerDisplay(MediaPlayer.Queue[index]); 
             FrameworkDispatcher.Update(); 
             MediaPlayer.MoveNext(); 
         }
@@ -129,8 +159,16 @@ namespace Shuffle_n_queue
         {
             Play.Visibility = System.Windows.Visibility.Collapsed;
             Pause.Visibility = System.Windows.Visibility.Visible;
-            FrameworkDispatcher.Update(); 
-            MediaPlayer.Resume(); 
+            FrameworkDispatcher.Update();
+            if (MediaPlayer.State == MediaState.Paused)
+                MediaPlayer.Resume();
+            else
+            {
+                MediaPlayer.Play(App.ViewModel.AllSongs, 0);
+                MediaPlayer.IsShuffled = true;
+                MediaPlayer.IsRepeating = true;
+                UpdatePlayerDisplay(MediaPlayer.Queue[0]); 
+            }
         }
  
         private void Pause_Click(object sender, RoutedEventArgs e)
