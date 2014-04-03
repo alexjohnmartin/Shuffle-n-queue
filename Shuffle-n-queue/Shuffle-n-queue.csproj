@@ -93,6 +93,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreditsPage.xaml.cs">
+      <DependentUpon>CreditsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -111,6 +114,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="CreditsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,6 +135,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\PanoramaBackground.png" />
+    <Content Include="Assets\About\appbar.chat.png" />
+    <Content Include="Assets\About\appbar.companioncube.png" />
+    <Content Include="Assets\About\appbar.email.png" />
+    <Content Include="Assets\About\appbar.marketplace.png" />
+    <Content Include="Assets\About\appbar.message.smiley.png" />
+    <Content Include="Assets\About\appbar.social.github.octocat.png" />
+    <Content Include="Assets\About\appbar.social.github.octocat.solid.png" />
+    <Content Include="Assets\About\appbar.social.linkedin.png" />
+    <Content Include="Assets\About\appbar.social.linkedin.variant.png" />
+    <Content Include="Assets\About\appbar.social.twitter.png" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

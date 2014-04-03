@@ -61,6 +61,15 @@ namespace Shuffle_n_queue.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credits.
+        /// </summary>
+        public static string AboutButtonCredits {
+            get {
+                return ResourceManager.GetString("AboutButtonCredits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string AboutButtonEmail {

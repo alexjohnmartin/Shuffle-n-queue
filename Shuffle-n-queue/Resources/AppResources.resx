@@ -146,4 +146,7 @@
   <data name="AboutHeader" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="AboutButtonCredits" xml:space="preserve">
+    <value>Credits</value>
+  </data>
 </root>

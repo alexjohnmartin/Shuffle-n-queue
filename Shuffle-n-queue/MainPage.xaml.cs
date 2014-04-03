@@ -51,9 +51,18 @@ namespace Shuffle_n_queue
 
         private void UpdatePlayerDisplay(Song song)
         {
-            SongText.Text = song.Name;
-            AlbumText.Text = song.Album.Name;
-            ArtistText.Text = song.Artist.Name;
+            if (song != null)
+            {
+                SongText.Text = song.Name;
+                AlbumText.Text = song.Album.Name;
+                ArtistText.Text = song.Artist.Name;
+            }
+            else
+            {
+                SongText.Text = string.Empty;
+                AlbumText.Text = string.Empty;
+                ArtistText.Text = string.Empty;
+            }
         }
 
         private void UpdatePlayerButtons()
@@ -177,6 +186,11 @@ namespace Shuffle_n_queue
             Pause.Visibility = System.Windows.Visibility.Collapsed;
             FrameworkDispatcher.Update(); 
             MediaPlayer.Pause(); 
+        }
+
+        public void CreditsButton_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/CreditsPage.xaml", UriKind.Relative));
         }
     }
 }

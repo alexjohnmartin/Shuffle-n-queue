@@ -135,7 +135,8 @@
             </phone:PanoramaItem>
 
             <phone:PanoramaItem Header="{Binding Path=LocalizedResources.AboutHeader, Source={StaticResource LocalizedStrings}}" Margin="0,-40,0,0">
-                <Grid x:Name="AboutPanel" Grid.Row="1" Margin="0,-40,0,0">
+                <ScrollViewer Grid.Row="1" Margin="0,-40,0,0">
+                <Grid x:Name="AboutPanel">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="200" />
@@ -179,7 +180,15 @@
                             <TextBlock Text="{Binding Path=LocalizedResources.AboutButtonStore, Source={StaticResource LocalizedStrings}}" />
                         </StackPanel>
                     </Button>
+
+                    <Button Name="CreditsButton" Click="CreditsButton_Click" Background="Blue" BorderThickness="0" Grid.Column="0" Grid.Row="3">
+                        <StackPanel>
+                            <Image Source="Assets/About/appbar.companioncube.png" MaxHeight="120" />
+                            <TextBlock Text="{Binding Path=LocalizedResources.AboutButtonCredits, Source={StaticResource LocalizedStrings}}" />
+                        </StackPanel>
+                    </Button>
                 </Grid>
+                </ScrollViewer>
             </phone:PanoramaItem>
         </phone:Panorama>
 
