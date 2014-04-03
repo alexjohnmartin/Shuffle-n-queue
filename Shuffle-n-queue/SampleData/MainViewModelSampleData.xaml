@@ -1,0 +1,16 @@
+﻿<vm:MainViewModel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:Shuffle_n_queue.ViewModels"
+    xmlns:media="clr-namespace:Microsoft.Xna.Framework.Media;assembly=Microsoft.Xna.Framework">
+
+    <vm:MainViewModel.SongItems>
+        <media:Song Name="design one"/>
+        <media:Song Name="design two"/>
+        <media:Song Name="design three"/>
+        <media:Song Name="design four"/>
+        <media:Song Name="design five"/>
+        <media:Song Name="design six"/>
+    </vm:MainViewModel.SongItems>
+
+</vm:MainViewModel>
