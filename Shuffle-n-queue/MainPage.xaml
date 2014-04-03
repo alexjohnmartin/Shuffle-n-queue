@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -86,6 +87,12 @@
                                     <TextBlock Text="{Binding Artist.Name}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                     <TextBlock Text="{Binding Album.Name}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                 </StackPanel>
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu IsZoomEnabled="True">
+                                        <toolkit:MenuItem Header="play" Click="PlayMenuItem_Click" Tag="{Binding}"/>
+                                        <toolkit:MenuItem Header="queue" Click="QueueMenuItem_Click" Tag="{Binding}"/>
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>

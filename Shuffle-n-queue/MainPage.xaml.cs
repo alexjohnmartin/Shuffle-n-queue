@@ -90,20 +90,24 @@ namespace Shuffle_n_queue
             //song clicked
             StackPanel panel = (StackPanel)sender;
             var selectedSong = (Song)panel.Tag;
+            PlaySong(selectedSong);
+        }
 
+        private void PlaySong(Song selectedSong)
+        {
             int index = 0;
             foreach (var song in App.ViewModel.AllSongs)
             {
                 if (song.Equals(selectedSong))
                     break;
 
-                index++; 
+                index++;
             }
 
             if (index < App.ViewModel.AllSongs.Count())
             {
-                UpdatePlayerDisplay(selectedSong); 
-                FrameworkDispatcher.Update(); 
+                UpdatePlayerDisplay(selectedSong);
+                FrameworkDispatcher.Update();
                 MediaPlayer.Play(App.ViewModel.AllSongs, index);
                 MediaPlayer.IsShuffled = true;
                 MediaPlayer.IsRepeating = true;
@@ -192,6 +196,18 @@ namespace Shuffle_n_queue
         public void CreditsButton_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/CreditsPage.xaml", UriKind.Relative));
+        }
+
+        private void PlayMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MenuItem)sender;
+            var song = (Song)item.Tag;
+            PlaySong(song); 
+        }
+
+        private void QueueMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("not implemented yet"); 
         }
     }
 }
