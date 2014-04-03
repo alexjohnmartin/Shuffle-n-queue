@@ -132,6 +132,10 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Buttons\transport.ff.png" />
+    <Content Include="Assets\Buttons\transport.pause.png" />
+    <Content Include="Assets\Buttons\transport.play.png" />
+    <Content Include="Assets\Buttons\transport.rew.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -100,15 +100,31 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="0"/>
                         <RowDefinition Height="100"/>
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0"/>
+                    <Rectangle Fill="Gray" Height="400" Width="400" Grid.Row="0"/>
                     
-                    <TextBlock Name="TrackCurrentTimeText" Text="0:00" Grid.Row="1" Margin="12,40,12,0" HorizontalAlignment="Left"/>
+                    <!--<TextBlock Name="TrackCurrentTimeText" Text="0:00" Grid.Row="1" Margin="12,40,12,0" HorizontalAlignment="Left"/>
                     <TextBlock Name="TrackRemainingTimeText" Text="0:00" Grid.Row="1" Margin="12,40,12,0" HorizontalAlignment="Right"/>
-                    <Slider Name="TrackSlider" Grid.Row="1" Value="0" Maximum="1" Margin="0,0,0,0"/>
+                    <Slider Name="TrackSlider" Grid.Row="1" Value="0" Maximum="1" Margin="0,0,0,0"/>-->
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                        <Button Name="Prev" Click="Prev_Click">
+                            <Image Source="Assets/Buttons/transport.rew.png"/>
+                        </Button>
+                        <Button Name="Play" Click="Play_Click">
+                            <Image Source="Assets/Buttons/transport.play.png"/>
+                        </Button>
+                        <Button Name="Pause" Click="Pause_Click">
+                            <Image Source="Assets/Buttons/transport.pause.png"/>
+                        </Button>
+                        <Button Name="Next" Click="Next_Click">
+                            <Image Source="Assets/Buttons/transport.ff.png"/>
+                        </Button>
+                    </StackPanel>
                 </Grid>
             </phone:PanoramaItem>
 

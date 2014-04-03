@@ -31,6 +31,27 @@ namespace Shuffle_n_queue
             {
                 App.ViewModel.LoadData();
             }
+
+            UpdatePlayerButtons();
+        }
+
+        private void UpdatePlayerButtons()
+        {
+            if (MediaPlayer.State == MediaState.Playing)
+            {
+                Play.Visibility = System.Windows.Visibility.Collapsed;
+                Pause.Visibility = System.Windows.Visibility.Visible;
+            }
+            else if (MediaPlayer.State == MediaState.Paused)
+            {
+                Play.Visibility = System.Windows.Visibility.Collapsed;
+                Pause.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                Play.Visibility = System.Windows.Visibility.Collapsed;
+                Pause.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void SongPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -53,7 +74,9 @@ namespace Shuffle_n_queue
                 FrameworkDispatcher.Update(); 
                 MediaPlayer.Play(App.ViewModel.AllSongs, index);
                 MediaPlayer.IsShuffled = true;
-                MediaPlayer.IsRepeating = true; 
+                MediaPlayer.IsRepeating = true;
+                Play.Visibility = System.Windows.Visibility.Collapsed;
+                Pause.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
@@ -88,6 +111,34 @@ namespace Shuffle_n_queue
             var email = new EmailComposeTask();
             email.Subject = "Feedback for the Calendar Tile application";
             email.Show();
+        }
+
+        private void Prev_Click(object sender, RoutedEventArgs e)
+        {
+            FrameworkDispatcher.Update(); 
+            MediaPlayer.MovePrevious();
+        }
+
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            FrameworkDispatcher.Update(); 
+            MediaPlayer.MoveNext(); 
+        }
+
+        private void Play_Click(object sender, RoutedEventArgs e)
+        {
+            Play.Visibility = System.Windows.Visibility.Collapsed;
+            Pause.Visibility = System.Windows.Visibility.Visible;
+            FrameworkDispatcher.Update(); 
+            MediaPlayer.Resume(); 
+        }
+ 
+        private void Pause_Click(object sender, RoutedEventArgs e)
+        {
+            Play.Visibility = System.Windows.Visibility.Visible;
+            Pause.Visibility = System.Windows.Visibility.Collapsed;
+            FrameworkDispatcher.Update(); 
+            MediaPlayer.Pause(); 
         }
     }
 }
