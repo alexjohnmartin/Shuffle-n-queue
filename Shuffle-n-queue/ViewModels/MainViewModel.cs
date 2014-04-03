@@ -15,6 +15,7 @@ namespace Shuffle_n_queue.ViewModels
         }
 
         public ObservableCollection<Song> SongItems { get; private set; }
+        public SongCollection AllSongs { get; set; }
 
         public bool IsDataLoaded
         {
@@ -32,8 +33,8 @@ namespace Shuffle_n_queue.ViewModels
                 if (source.MediaSourceType == MediaSourceType.LocalDevice)
                 {
                     var mediaLibrary = new MediaLibrary(source);
-                    var songs = mediaLibrary.Songs;
-                    foreach (var song in songs)
+                    AllSongs = mediaLibrary.Songs;
+                    foreach (var song in AllSongs)
                     {
                         SongItems.Add(song); 
                     }

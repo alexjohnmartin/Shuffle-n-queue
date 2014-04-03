@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework;
 
 namespace Shuffle_n_queue
 {
@@ -36,9 +37,24 @@ namespace Shuffle_n_queue
         {
             //song clicked
             StackPanel panel = (StackPanel)sender;
-            var song = (Song)panel.Tag;
+            var selectedSong = (Song)panel.Tag;
 
-            MessageBox.Show(song.Name);
+            int index = 0;
+            foreach (var song in App.ViewModel.AllSongs)
+            {
+                if (song.Equals(selectedSong))
+                    break;
+
+                index++; 
+            }
+
+            if (index < App.ViewModel.AllSongs.Count())
+            {
+                FrameworkDispatcher.Update(); 
+                MediaPlayer.Play(App.ViewModel.AllSongs, index);
+                MediaPlayer.IsShuffled = true;
+                MediaPlayer.IsRepeating = true; 
+            }
         }
 
         public void TwitterButton_Click(object sender, EventArgs e)
