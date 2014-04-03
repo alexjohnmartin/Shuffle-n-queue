@@ -45,6 +45,7 @@ namespace Shuffle_n_queue
                 App.ViewModel.LoadData();
             }
 
+            FrameworkDispatcher.Update();
             UpdatePlayerButtons();
             UpdatePlayerDisplay(MediaPlayer.Queue.ActiveSong); 
         }
