@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -81,11 +80,12 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432" Name="SongPanel" Tap="SongPanel_Tap" Tag="{Binding}">
                                 <!--Replace rectangle with image-->
-                                <Border BorderThickness="1" Width="99" Height="99" BorderBrush="#FFFFC700" Background="#FFFFC700"/>
+                                <!--<Border BorderThickness="1" Width="99" Height="99" BorderBrush="#FFFFC700" Background="#FFFFC700"/>-->
+                                <Image Source="{Binding AlbumArt}" Width="100" Height="100"/>
                                 <StackPanel Width="311" Margin="8,-7,0,0">
                                     <TextBlock Text="{Binding Name}" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
-                                    <TextBlock Text="{Binding Artist.Name}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
-                                    <TextBlock Text="{Binding Album.Name}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    <TextBlock Text="{Binding Artist}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    <TextBlock Text="{Binding Album}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                 </StackPanel>
                                 <toolkit:ContextMenuService.ContextMenu>
                                     <toolkit:ContextMenu IsZoomEnabled="True">
@@ -107,7 +107,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="360"/>
                         <RowDefinition Height="100"/>
                     </Grid.RowDefinitions>
 
@@ -117,8 +117,8 @@
                         <TextBlock Name="AlbumText" Text="album" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                     </StackPanel>
 
-                    <Image Grid.Row="0"/>
-                    <Rectangle Fill="Gray" Height="400" Width="400" Grid.Row="1"/>
+                    <!--<Rectangle Fill="Gray" Height="400" Width="400" Grid.Row="1"/>-->
+                    <Image Grid.Row="1" Name="NowPlayingImage"/>
                     
                     <!--<TextBlock Name="TrackCurrentTimeText" Text="0:00" Grid.Row="1" Margin="12,40,12,0" HorizontalAlignment="Left"/>
                     <TextBlock Name="TrackRemainingTimeText" Text="0:00" Grid.Row="1" Margin="12,40,12,0" HorizontalAlignment="Right"/>

@@ -4,17 +4,26 @@ using System.ComponentModel;
 using System.Linq; 
 using Shuffle_n_queue.Resources;
 using Microsoft.Xna.Framework.Media;
+using System.Windows.Media.Imaging;
 
 namespace Shuffle_n_queue.ViewModels
 {
+    public class SongItem
+    {
+        public string Name { get; set; }
+        public string Album { get; set; }
+        public string Artist { get; set; }
+        public WriteableBitmap AlbumArt { get; set; }
+    }
+
     public class MainViewModel : INotifyPropertyChanged
     {
         public MainViewModel()
         {
-            this.SongItems = new ObservableCollection<Song>();
+            this.SongItems = new ObservableCollection<SongItem>();
         }
 
-        public ObservableCollection<Song> SongItems { get; private set; }
+        public ObservableCollection<SongItem> SongItems { get; private set; }
         public SongCollection AllSongs { get; set; }
 
         public bool IsDataLoaded
@@ -36,7 +45,36 @@ namespace Shuffle_n_queue.ViewModels
                     AllSongs = mediaLibrary.Songs;
                     foreach (var song in AllSongs)
                     {
-                        SongItems.Add(song); 
+                        //try
+                        //{
+                        //    var stream = song.Album.GetAlbumArt();
+                        //    var bitmap = new WriteableBitmap(100, 100);
+                        //    bitmap.SetSource(stream); 
+                        //    SongItems.Add(new SongItem
+                        //    {
+                        //        Name = song.Name,
+                        //        Artist = song.Artist.Name,
+                        //        Album = song.Album.Name,
+                        //        AlbumArt = bitmap
+                        //    });
+                        //}
+                        //catch
+                        //{
+                        //    SongItems.Add(new SongItem
+                        //    {
+                        //        Name = song.Name,
+                        //        Artist = song.Artist.Name,
+                        //        Album = song.Album.Name,
+                        //        AlbumArt = new WriteableBitmap(100, 100)
+                        //    });
+                        //}   
+                        SongItems.Add(new SongItem
+                            {
+                                Name = song.Name,
+                                Artist = song.Artist.Name,
+                                Album = song.Album.Name,
+                                AlbumArt = new WriteableBitmap(100, 100)
+                            });
                     }
                 }
             }
