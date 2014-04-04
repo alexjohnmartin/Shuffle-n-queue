@@ -5,25 +5,27 @@ using System.Linq;
 using Shuffle_n_queue.Resources;
 using Microsoft.Xna.Framework.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Windows;
 
 namespace Shuffle_n_queue.ViewModels
 {
-    public class SongItem
-    {
-        public string Name { get; set; }
-        public string Album { get; set; }
-        public string Artist { get; set; }
-        public WriteableBitmap AlbumArt { get; set; }
-    }
+    //public class SongItem
+    //{
+    //    public string Name { get; set; }
+    //    public string Album { get; set; }
+    //    public string Artist { get; set; }
+    //    public WriteableBitmap AlbumArt { get; set; }
+    //}
 
     public class MainViewModel : INotifyPropertyChanged
     {
         public MainViewModel()
         {
-            this.SongItems = new ObservableCollection<SongItem>();
+            this.SongItems = new ObservableCollection<Song>();
         }
 
-        public ObservableCollection<SongItem> SongItems { get; private set; }
+        public ObservableCollection<Song> SongItems { get; private set; }
         public SongCollection AllSongs { get; set; }
 
         public bool IsDataLoaded
@@ -68,13 +70,8 @@ namespace Shuffle_n_queue.ViewModels
                         //        AlbumArt = new WriteableBitmap(100, 100)
                         //    });
                         //}   
-                        SongItems.Add(new SongItem
-                            {
-                                Name = song.Name,
-                                Artist = song.Artist.Name,
-                                Album = song.Album.Name,
-                                AlbumArt = new WriteableBitmap(100, 100)
-                            });
+
+                        SongItems.Add(song); 
                     }
                 }
             }

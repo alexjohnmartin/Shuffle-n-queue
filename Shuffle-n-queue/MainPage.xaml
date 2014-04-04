@@ -80,12 +80,12 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432" Name="SongPanel" Tap="SongPanel_Tap" Tag="{Binding}">
                                 <!--Replace rectangle with image-->
-                                <!--<Border BorderThickness="1" Width="99" Height="99" BorderBrush="#FFFFC700" Background="#FFFFC700"/>-->
-                                <Image Source="{Binding AlbumArt}" Width="100" Height="100"/>
-                                <StackPanel Width="311" Margin="8,-7,0,0">
-                                    <TextBlock Text="{Binding Name}" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
-                                    <TextBlock Text="{Binding Artist}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
-                                    <TextBlock Text="{Binding Album}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                <Border BorderThickness="1" Width="10" Height="99" BorderBrush="#FFFFC700" Background="#FFFFC700"/>
+                                <!--<Image Source="{Binding AlbumArt}" Width="100" Height="100"/>-->
+                                <StackPanel Width="311" Margin="12,-7,0,0">
+                                    <TextBlock Text="{Binding Name}" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
+                                    <TextBlock Text="{Binding Artist}" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    <TextBlock Text="{Binding Album}" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                 </StackPanel>
                                 <toolkit:ContextMenuService.ContextMenu>
                                     <toolkit:ContextMenu IsZoomEnabled="True">
