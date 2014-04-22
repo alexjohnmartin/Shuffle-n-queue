@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq; 
 using Shuffle_n_queue.Resources;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Media.PhoneExtensions; 
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
@@ -26,6 +27,7 @@ namespace Shuffle_n_queue.ViewModels
         }
 
         public ObservableCollection<Song> SongItems { get; private set; }
+        public PlaylistCollection Playlists { get; set; }
         public SongCollection AllSongs { get; set; }
 
         public bool IsDataLoaded
@@ -44,35 +46,12 @@ namespace Shuffle_n_queue.ViewModels
                 if (source.MediaSourceType == MediaSourceType.LocalDevice)
                 {
                     var mediaLibrary = new MediaLibrary(source);
+
                     AllSongs = mediaLibrary.Songs;
                     foreach (var song in AllSongs)
-                    {
-                        //try
-                        //{
-                        //    var stream = song.Album.GetAlbumArt();
-                        //    var bitmap = new WriteableBitmap(100, 100);
-                        //    bitmap.SetSource(stream); 
-                        //    SongItems.Add(new SongItem
-                        //    {
-                        //        Name = song.Name,
-                        //        Artist = song.Artist.Name,
-                        //        Album = song.Album.Name,
-                        //        AlbumArt = bitmap
-                        //    });
-                        //}
-                        //catch
-                        //{
-                        //    SongItems.Add(new SongItem
-                        //    {
-                        //        Name = song.Name,
-                        //        Artist = song.Artist.Name,
-                        //        Album = song.Album.Name,
-                        //        AlbumArt = new WriteableBitmap(100, 100)
-                        //    });
-                        //}   
+                        SongItems.Add(song);
 
-                        SongItems.Add(song); 
-                    }
+                    Playlists = mediaLibrary.Playlists;
                 }
             }
             //SongItems.OrderBy(s => s.Artist + s.Name); 

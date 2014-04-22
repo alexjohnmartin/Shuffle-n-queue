@@ -9,17 +9,19 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Media.PhoneExtensions;
 using Microsoft.Xna.Framework;
 using System.Threading;
 using System.Windows.Media.Imaging;
 using Nokia.Graphics.Imaging;
+using QueuedAudioPlaybackAgent;
+using Microsoft.Phone.BackgroundAudio;
+using System.Windows.Media;
 
 namespace Shuffle_n_queue
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private QueuedMediaPlayer _queuedMediaPlayer; 
-
         // Constructor
         public MainPage()
         {
@@ -37,13 +39,95 @@ namespace Shuffle_n_queue
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadData();
-                _queuedMediaPlayer = new QueuedMediaPlayer();
-                _queuedMediaPlayer.NewSongPlaying += _queuedMediaPlayer_NewSongPlaying;
+                //AudioPlayer.Initialize(App.ViewModel.AllSongs); 
+                AddPlaylistsToPanorama();
             }
 
             FrameworkDispatcher.Update();
             UpdatePlayerButtons();
             UpdatePlayerDisplay(); 
+        }
+
+        private void AddPlaylistsToPanorama()
+        {
+            int index = 1;
+            foreach (var playlist in App.ViewModel.Playlists)
+            {
+                AddPlaylistToPanorama(playlist, index);
+                index++;
+            }
+        }
+
+        private void AddPlaylistToPanorama(Playlist playlist, int index)
+        {
+            /*
+             <phone:PanoramaItem Header="Songs" Margin="0,-40,0,0">
+                <phone:LongListSelector Margin="0,-38,0,2" ItemsSource="{Binding SongItems}">
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432" Name="SongPanel" Tap="SongPanel_Tap" Tag="{Binding}">
+                                <Border BorderThickness="1" Width="10" Height="99" BorderBrush="#FFFFC700" Background="#FFFFC700"/>
+                                <!--<Image Source="{Binding AlbumArt}" Width="100" Height="100"/>-->
+                                <StackPanel Width="311" Margin="12,-7,0,0">
+                                    <TextBlock Text="{Binding Name}" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
+                                    <TextBlock Text="{Binding Artist}" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    <TextBlock Text="{Binding Album}" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
+              </phone:PanoramaItem>
+            */
+
+            var item = new PanoramaItem { Header = playlist.Name, Margin = new Thickness(0, -40, 0, 0) };
+            var scroller = new ScrollViewer { Margin = new Thickness(0, -38, 0, 2) };
+            var listStackPanel = new StackPanel { Orientation = System.Windows.Controls.Orientation.Vertical };
+            foreach (var song in playlist.Songs)
+            { 
+                var outerStackPanel = new StackPanel {
+                        Orientation = System.Windows.Controls.Orientation.Horizontal, 
+                        Margin = new Thickness(12,2,0,4), 
+                        Height = 105, 
+                        Width = 432, 
+                        Tag = song
+                };
+                outerStackPanel.Tap += SongPanel_Tap; //TODO:play songs from the playlist, not all songs
+
+                var rectangle = new Border { BorderThickness = new Thickness(1), Width = 10, Height = 99, BorderBrush = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 199, 0)), Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 199, 0)) };
+                outerStackPanel.Children.Add(rectangle);
+
+                var innerStackPanel = new StackPanel { Width = 311, Margin = new Thickness(12,-7,0,0) };
+                var nameTextBlock = new TextBlock { 
+                    Text = song.Name, 
+                    Margin = new Thickness(0), 
+                    Style = (System.Windows.Style)Resources["PhoneTextExtraLargeStyle"],
+                    FontSize = (double)Resources["PhoneFontSizeLarge"]
+                };
+                innerStackPanel.Children.Add(nameTextBlock);
+
+                var artistTextBlock = new TextBlock
+                {
+                    Text = song.Artist.Name,
+                    Margin = new Thickness(0, -2, 10, 0),
+                    Style = (System.Windows.Style)Resources["PhoneTextSubtleStyle"],
+                };
+                innerStackPanel.Children.Add(artistTextBlock);
+
+                var albumTextBlock = new TextBlock
+                {
+                    Text = song.Album.Name,
+                    Margin = new Thickness(0, -2, 10, 0),
+                    Style = (System.Windows.Style)Resources["PhoneTextSubtleStyle"],
+                };
+                innerStackPanel.Children.Add(albumTextBlock);
+
+                outerStackPanel.Children.Add(innerStackPanel);
+                listStackPanel.Children.Add(outerStackPanel);
+            }
+            scroller.Content = listStackPanel;
+            item.Content = scroller;
+            MainPanorama.Items.Insert(index, item);
         }
 
         void _queuedMediaPlayer_NewSongPlaying(object sender, EventArgs e)
@@ -53,29 +137,29 @@ namespace Shuffle_n_queue
 
         private async void UpdatePlayerDisplay()
         {
-            var song = _queuedMediaPlayer.GetCurrentSong();
-            if (song != null)
-            {
-                SongText.Text = song.Name;
-                AlbumText.Text = song.Album.Name;
-                ArtistText.Text = song.Artist.Name;
+            //var song = AudioPlayer.CurrentSong;
+            //if (song != null)
+            //{
+            //    SongText.Text = song.Name;
+            //    AlbumText.Text = song.Album.Name;
+            //    ArtistText.Text = song.Artist.Name;
 
-                var client = new Nokia.Music.MusicClient("6944ff89bdf75c7b74a3f24f28e3fe26");
-                try
-                {
-                    var searchTerm = song.Name;
-                    var stream = song.Album.GetAlbumArt();
-                    var bitmap = new WriteableBitmap(360, 360);
-                    bitmap.SetSource(stream);
-                    NowPlayingImage.Source = bitmap;
-                    NowPlayingImage.Visibility = System.Windows.Visibility.Visible;
-                }
-                catch
-                {
-                    NowPlayingImage.Visibility = System.Windows.Visibility.Collapsed;
-                }
-            }
-            else
+            //    //var client = new Nokia.Music.MusicClient("6944ff89bdf75c7b74a3f24f28e3fe26");
+            //    try
+            //    {
+            //        var searchTerm = song.Name;
+            //        var stream = song.Album.GetAlbumArt();
+            //        var bitmap = new WriteableBitmap(360, 360);
+            //        bitmap.SetSource(stream);
+            //        NowPlayingImage.Source = bitmap;
+            //        NowPlayingImage.Visibility = System.Windows.Visibility.Visible;
+            //    }
+            //    catch
+            //    {
+            //        NowPlayingImage.Visibility = System.Windows.Visibility.Collapsed;
+            //    }
+            //}
+            //else
             {
                 SongText.Text = string.Empty;
                 AlbumText.Text = string.Empty;
@@ -107,7 +191,23 @@ namespace Shuffle_n_queue
             //song clicked
             StackPanel panel = (StackPanel)sender;
             var selectedSong = (Song)panel.Tag;
-            _queuedMediaPlayer.Play(selectedSong); 
+
+            var index = 0;
+            foreach (var song in App.ViewModel.AllSongs)
+            {
+                if (song == selectedSong) 
+                    break; 
+
+                index++; 
+            }
+
+            MediaPlayer.IsShuffled = true;
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(App.ViewModel.AllSongs, index); 
+
+            //_queuedMediaPlayer.Play(selectedSong); 
+            //AudioPlayer.Play(selectedSong);
+            //MediaPlayer.Play(selectedSong); 
         }
 
         public void TwitterButton_Click(object sender, EventArgs e)
@@ -145,7 +245,9 @@ namespace Shuffle_n_queue
 
         private void Prev_Click(object sender, RoutedEventArgs e)
         {
-            _queuedMediaPlayer.PlayPrev();
+            //_queuedMediaPlayer.PlayPrev();
+            //AudioPlayer.PlayPrev(BackgroundAudioPlayer.Instance); 
+            BackgroundAudioPlayer.Instance.SkipPrevious();
             UpdatePlayerDisplay(); 
         }
 
@@ -158,23 +260,26 @@ namespace Shuffle_n_queue
             //FrameworkDispatcher.Update(); 
             //MediaPlayer.MoveNext(); 
 
-            _queuedMediaPlayer.PlayNext();
+            //_queuedMediaPlayer.PlayNext();
+            //AudioPlayer.PlayNext(BackgroundAudioPlayer.Instance); 
+            BackgroundAudioPlayer.Instance.SkipNext(); 
             UpdatePlayerDisplay(); 
         }
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
-            Play.Visibility = System.Windows.Visibility.Collapsed;
-            Pause.Visibility = System.Windows.Visibility.Visible;
-            _queuedMediaPlayer.Resume();
-            UpdatePlayerDisplay(); 
+            //Play.Visibility = System.Windows.Visibility.Collapsed;
+            //Pause.Visibility = System.Windows.Visibility.Visible;
+            ////_queuedMediaPlayer.Resume();
+            ////AudioPlayer.Play
+            //UpdatePlayerDisplay(); 
         }
  
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
-            Play.Visibility = System.Windows.Visibility.Visible;
-            Pause.Visibility = System.Windows.Visibility.Collapsed;
-            _queuedMediaPlayer.Pause(); 
+            //Play.Visibility = System.Windows.Visibility.Visible;
+            //Pause.Visibility = System.Windows.Visibility.Collapsed;
+            //_queuedMediaPlayer.Pause(); 
         }
 
         public void CreditsButton_Click(object sender, EventArgs e)
@@ -186,14 +291,18 @@ namespace Shuffle_n_queue
         {
             var item = (MenuItem)sender;
             var song = (Song)item.Tag;
-            _queuedMediaPlayer.Play(song); 
+
+            //_queuedMediaPlayer.Play(song); 
+            //AudioPlayer.Play(song, BackgroundAudioPlayer.Instance); 
         }
 
         private void QueueMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var item = (MenuItem)sender;
             var song = (Song)item.Tag;
-            _queuedMediaPlayer.Queue(song); 
+            //_queuedMediaPlayer.Queue(song); 
+            //AudioPlayer.Queue(song); 
+
             //var indexOfNextSong = MediaPlayer.Queue.ActiveSongIndex;
             //indexOfNextSong++;
             //if (indexOfNextSong >= MediaPlayer.Queue.Count) indexOfNextSong = 0;
