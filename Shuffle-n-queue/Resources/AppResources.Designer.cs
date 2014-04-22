@@ -124,7 +124,7 @@ namespace Shuffle_n_queue.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shuffle&apos;n&apos;queue.
+        ///   Looks up a localized string similar to Your music shuffled.
         /// </summary>
         public static string ApplicationTitle {
             get {
