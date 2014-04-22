@@ -13,7 +13,6 @@ using Microsoft.Xna.Framework.Media.PhoneExtensions;
 using Microsoft.Xna.Framework;
 using System.Threading;
 using System.Windows.Media.Imaging;
-using Nokia.Graphics.Imaging;
 using Microsoft.Phone.BackgroundAudio;
 using System.Windows.Media;
 
