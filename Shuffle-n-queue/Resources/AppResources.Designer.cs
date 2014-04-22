@@ -106,7 +106,7 @@ namespace Shuffle_n_queue.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shuffle through your music, queue up the next tracks.
+        ///   Looks up a localized string similar to Super simple music player to play the music and playlists on your device, shuffled. Version 1.0.0.0..
         /// </summary>
         public static string AboutDescription {
             get {
