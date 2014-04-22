@@ -89,7 +89,8 @@ namespace Shuffle_n_queue
                         Margin = new Thickness(12,2,0,4), 
                         Height = 105, 
                         Width = 432, 
-                        Tag = song
+                        Tag = song, 
+                        Name = playlist.Name
                 };
                 outerStackPanel.Tap += SongPanel_Tap; //TODO:play songs from the playlist, not all songs
 
@@ -191,22 +192,34 @@ namespace Shuffle_n_queue
             StackPanel panel = (StackPanel)sender;
             var selectedSong = (Song)panel.Tag;
 
-            var index = 0;
-            foreach (var song in App.ViewModel.AllSongs)
+            if (!MediaPlayer.IsShuffled) MediaPlayer.IsShuffled = true;
+            if (!MediaPlayer.IsRepeating) MediaPlayer.IsRepeating = true;
+
+            if (panel.Name == "SongPanel")
             {
-                if (song == selectedSong) 
-                    break; 
+                var index = 0;
+                foreach (var song in App.ViewModel.AllSongs)
+                {
+                    if (song == selectedSong)
+                        break;
 
-                index++; 
+                    index++;
+                }
+                MediaPlayer.Play(App.ViewModel.AllSongs, index);
             }
+            else
+            {
+                var playlist = App.ViewModel.Playlists.First(p => p.Name.Equals(panel.Name));
+                var index = 0;
+                foreach (var song in playlist.Songs)
+                {
+                    if (song == selectedSong)
+                        break;
 
-            MediaPlayer.IsShuffled = true;
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(App.ViewModel.AllSongs, index); 
-
-            //_queuedMediaPlayer.Play(selectedSong); 
-            //AudioPlayer.Play(selectedSong);
-            //MediaPlayer.Play(selectedSong); 
+                    index++;
+                }
+                MediaPlayer.Play(playlist.Songs, index);
+            }
         }
 
         public void TwitterButton_Click(object sender, EventArgs e)
