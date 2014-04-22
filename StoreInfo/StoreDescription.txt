@@ -2,7 +2,9 @@ Want to just shuffle and play the music on your phone?
 Annoyed with the default music players that put page after page of useless stuff between you and your songs? 
 Here you go, a super-simple music player. 
 
-It'll play your songs or playlists in random order. 
+It'll play your songs in random order. 
+It can play all songs or just the songs from a playlist.
+You pick a song to start with and it'll take it from there.
 That's all.
 
 If you are after:
@@ -12,6 +14,7 @@ If you are after:
  * tour dates
  * and other extras that suck your data allowance and distract from the music 
 then you need to look elsewhere. 
+
 
 
 
