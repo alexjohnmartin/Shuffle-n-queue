@@ -14,7 +14,6 @@ using Microsoft.Xna.Framework;
 using System.Threading;
 using System.Windows.Media.Imaging;
 using Nokia.Graphics.Imaging;
-using QueuedAudioPlaybackAgent;
 using Microsoft.Phone.BackgroundAudio;
 using System.Windows.Media;
 
