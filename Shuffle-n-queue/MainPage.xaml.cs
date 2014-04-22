@@ -195,31 +195,26 @@ namespace Shuffle_n_queue
             if (!MediaPlayer.IsShuffled) MediaPlayer.IsShuffled = true;
             if (!MediaPlayer.IsRepeating) MediaPlayer.IsRepeating = true;
 
+            SongCollection songCollection; 
             if (panel.Name == "SongPanel")
             {
-                var index = 0;
-                foreach (var song in App.ViewModel.AllSongs)
-                {
-                    if (song == selectedSong)
-                        break;
-
-                    index++;
-                }
-                MediaPlayer.Play(App.ViewModel.AllSongs, index);
+                songCollection = App.ViewModel.AllSongs;
             }
             else
             {
                 var playlist = App.ViewModel.Playlists.First(p => p.Name.Equals(panel.Name));
-                var index = 0;
-                foreach (var song in playlist.Songs)
-                {
-                    if (song == selectedSong)
-                        break;
-
-                    index++;
-                }
-                MediaPlayer.Play(playlist.Songs, index);
+                songCollection = playlist.Songs;
             }
+
+            var index = 0;
+            foreach (var song in App.ViewModel.AllSongs)
+            {
+                if (song == selectedSong)
+                    break;
+
+                index++;
+            }
+            MediaPlayer.Play(songCollection, index);
         }
 
         public void TwitterButton_Click(object sender, EventArgs e)
