@@ -1,1 +1,2 @@
 1.0.0.0 - support playing songs and playlists
+1.1.0.0 - adding review system, bugsense, links to other apps, fixed email-to address

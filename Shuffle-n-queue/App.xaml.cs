@@ -10,6 +10,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Shuffle_n_queue.Resources;
 using Shuffle_n_queue.ViewModels;
+using BugSense;
+using BugSense.Core.Model;
 
 namespace Shuffle_n_queue
 {
@@ -44,8 +46,11 @@ namespace Shuffle_n_queue
         /// </summary>
         public App()
         {
+            // Initialize BugSense
+            BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), RootFrame, "e6ada059");
+            BugSenseHandler.Instance.LeaveBreadCrumb("App initialize");
             // Global handler for uncaught exceptions.
-            UnhandledException += Application_UnhandledException;
+            //UnhandledException += Application_UnhandledException;
 
             // Standard XAML initialization
             InitializeComponent();

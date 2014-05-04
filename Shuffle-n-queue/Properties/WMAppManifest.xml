@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{23cd315a-d448-4d15-9e94-9850ca59aa05}" Title="Your music shuffled" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Alex Martin" Description="Shuffle and play your music" Publisher="Nocturnal Tendencies" PublisherID="{faea9ebe-987e-43f8-9089-2bdc45338f84}">
+  <App xmlns="" ProductID="{23cd315a-d448-4d15-9e94-9850ca59aa05}" Title="Your music shuffled" RuntimeType="Silverlight" Version="1.1.0.0" Genre="apps.normal" Author="Alex Martin" Description="Shuffle and play your music" Publisher="Nocturnal Tendencies" PublisherID="{faea9ebe-987e-43f8-9089-2bdc45338f84}">
     <IconPath IsRelative="true" IsResource="false">AppIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />

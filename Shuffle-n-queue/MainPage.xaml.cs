@@ -15,6 +15,9 @@ using System.Threading;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.BackgroundAudio;
 using System.Windows.Media;
+using BugSense;
+using RateMyApp.Helpers;
+using System.Xml.Linq;
 
 namespace Shuffle_n_queue
 {
@@ -28,12 +31,14 @@ namespace Shuffle_n_queue
         
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            BugSenseHandler.Instance.LeaveBreadCrumb("MainPage - navigated to");
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadData();
                 AddPlaylistsToPanorama();
             }
 
+            UpdateButtonColor();
             FrameworkDispatcher.Update();
         }
 
@@ -69,6 +74,7 @@ namespace Shuffle_n_queue
 
         private void AddPlaylistToPanorama(Playlist playlist, int index)
         {
+            BugSenseHandler.Instance.LeaveBreadCrumb("MainPage - adding playlist to panorama");
             var item = new PanoramaItem { Header = playlist.Name, Margin = new Thickness(0, -40, 0, 0) };
             var scroller = new ScrollViewer { Margin = new Thickness(0, -38, 0, 2) };
             var listStackPanel = new StackPanel { Orientation = System.Windows.Controls.Orientation.Vertical };
@@ -125,6 +131,7 @@ namespace Shuffle_n_queue
             try
             {
                 //song clicked
+                BugSenseHandler.Instance.LeaveBreadCrumb("MainPage - song clicked");
                 FrameworkDispatcher.Update();
                 StackPanel panel = (StackPanel)sender;
                 var selectedSong = (Song)panel.Tag;
@@ -159,7 +166,7 @@ namespace Shuffle_n_queue
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                BugSenseHandler.Instance.LogException(ex);
             }
         }
 
@@ -184,7 +191,7 @@ namespace Shuffle_n_queue
 
         public void ReviewButton_Click(object sender, EventArgs e)
         {
-            //FeedbackHelper.Default.Reviewed();
+            FeedbackHelper.Default.Reviewed();
             var marketplace = new MarketplaceReviewTask();
             marketplace.Show();
         }
@@ -192,13 +199,51 @@ namespace Shuffle_n_queue
         public void EmailButton_Click(object sender, EventArgs e)
         {
             var email = new EmailComposeTask();
-            email.Subject = "Feedback for the Shuffle'n'queue application";
+            email.To = "alexmartin9999@hotmail.com";
+            email.Subject = "Feedback for the Your Music Shuffled application";
             email.Show();
         }
 
         public void CreditsButton_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/CreditsPage.xaml", UriKind.Relative));
+        }
+
+        private void AppButton_Click(object sender, RoutedEventArgs e)
+        {
+            BugSenseHandler.Instance.LeaveBreadCrumb("MainPage - other app...");
+            var button = (Button)sender;
+            var task = new MarketplaceDetailTask();
+            task.ContentIdentifier = button.Tag.ToString();
+            BugSenseHandler.Instance.LeaveBreadCrumb("MainPage - ..." + button.Tag.ToString());
+            task.ContentType = MarketplaceContentType.Applications;
+            task.Show();
+        }
+
+        private void PinButton_Click(object sender, RoutedEventArgs e)
+        {
+            BugSenseHandler.Instance.LeaveBreadCrumb("MainPage - pin to home screen");
+            var tile = ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.ToString().Contains("MainPage.xaml"));
+            if (tile == null) ShellTile.Create(new Uri("/MainPage.xaml?test=true", UriKind.Relative), GetTileData(), true);
+        }
+
+        private ShellTileData GetTileData()
+        {
+            BugSenseHandler.Instance.LeaveBreadCrumb("MainPage - get tile data");
+            var data = new FlipTileData();
+            data.BackgroundImage = new Uri(@"/Assets/Tiles/FlipCycleTileMedium.png", UriKind.Relative);
+            data.WideBackgroundImage = new Uri(@"/Assets/Tiles/FlipCycleTileLarge.png", UriKind.Relative);
+            data.Title = Shuffle_n_queue.Resources.AppResources.ApplicationTitle;
+            return data;
+        }
+
+        private void UpdateButtonColor()
+        {
+            VersionTextBox.Text = "v" + XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
+            ReviewButton.Background = new SolidColorBrush((System.Windows.Media.Color)Application.Current.Resources["PhoneAccentColor"]);
+            EmailButton.Background = new SolidColorBrush((System.Windows.Media.Color)Application.Current.Resources["PhoneAccentColor"]);
+            CreditsButton.Background = new SolidColorBrush((System.Windows.Media.Color)Application.Current.Resources["PhoneAccentColor"]);
+            PinButton.Background = new SolidColorBrush((System.Windows.Media.Color)Application.Current.Resources["PhoneAccentColor"]);
         }
     }
 }

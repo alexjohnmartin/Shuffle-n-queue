@@ -79,6 +79,15 @@ namespace Shuffle_n_queue.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pin to home.
+        /// </summary>
+        public static string AboutButtonPin {
+            get {
+                return ResourceManager.GetString("AboutButtonPin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Review.
         /// </summary>
         public static string AboutButtonReview {
@@ -106,7 +115,7 @@ namespace Shuffle_n_queue.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Super simple music player to play the music and playlists on your device, shuffled. Version 1.0.0.0..
+        ///   Looks up a localized string similar to Super simple music player to play the music and playlists on your device, shuffled..
         /// </summary>
         public static string AboutDescription {
             get {
@@ -129,6 +138,15 @@ namespace Shuffle_n_queue.Resources {
         public static string ApplicationTitle {
             get {
                 return ResourceManager.GetString("ApplicationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other apps.
+        /// </summary>
+        public static string OtherAppsHeader {
+            get {
+                return ResourceManager.GetString("OtherAppsHeader", resourceCulture);
             }
         }
         

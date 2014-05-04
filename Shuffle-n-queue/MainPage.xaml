@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:ctrl="clr-namespace:RateMyApp.Controls;assembly=RateMyApp"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -27,7 +28,6 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432" Name="SongPanel" Tap="SongPanel_Tap" Tag="{Binding}">
                                 <Border BorderThickness="1" Width="10" Height="99" BorderBrush="#FFFFC700" Background="#FFFFC700"/>
-                                <!--<Image Source="{Binding AlbumArt}" Width="100" Height="100"/>-->
                                 <StackPanel Width="311" Margin="12,-7,0,0">
                                     <TextBlock Text="{Binding Name}" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
                                     <TextBlock Text="{Binding Artist}" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
@@ -75,12 +75,110 @@
                 </Grid>
             </phone:PanoramaItem>-->
 
+            <phone:PanoramaItem Header="{Binding Path=LocalizedResources.OtherAppsHeader, Source={StaticResource LocalizedStrings}}" Margin="-4,-40,0,0">
+                <ScrollViewer Grid.Row="1" Margin="4,-40,0,0">
+                    <Grid x:Name="OtherAppsPanel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="0" Click="AppButton_Click" 
+                                HorizontalAlignment="Left" Width="420" 
+                                Tag="bb949009-c3c3-48d4-ac52-e6c3db0b52e3">
+                            <Grid Width="380">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="Assets/OtherApps/toonify.png" Grid.Column="0"/>
+                                <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
+                                    <TextBlock Text="Toonify" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
+                                    <TextBlock Text="Make comics with your camera phone" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+
+                        <Button Grid.Row="1" Click="AppButton_Click" 
+                                HorizontalAlignment="Left" Width="420" 
+                                Tag="48e02bca-5cac-4a3d-8be1-e5efd46e716e">
+                            <Grid Width="380">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="Assets/OtherApps/trail-mapper.png" Grid.Column="0"/>
+                                <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
+                                    <TextBlock Text="Trail Mapper" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap" />
+                                    <TextBlock Text="Record your favorite trails" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+
+                        <!--<Button Grid.Row="2" Click="AppButton_Click" 
+                                HorizontalAlignment="Left" Width="420" 
+                                Tag="11581a6e-ef15-4146-a76d-ec5e7a69205c">
+                            <Grid Width="380">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="Assets/OtherApps/your-music-shuffled.png" Grid.Column="0"/>
+                                <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
+                                    <TextBlock Text="Your Music Shuffled" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap" />
+                                    <TextBlock Text="No-frills, no distractions music player" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
+                        </Button>-->
+
+                        <Button Grid.Row="3" Click="AppButton_Click" 
+                                HorizontalAlignment="Left" Width="420" 
+                                Tag="bc9186c4-d0b6-405a-80b8-35825803fe75">
+                            <Grid Width="380">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="Assets/OtherApps/calendar-tile.png" Grid.Column="0"/>
+                                <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
+                                    <TextBlock Text="Calendar Tile" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap" />
+                                    <TextBlock Text="Put a calendar on your home screen" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+
+                        <Button Grid.Row="4" Click="AppButton_Click" 
+                                HorizontalAlignment="Left" Width="420" 
+                                Tag="fd95ad37-68e5-4c6d-b73b-3240871bb1fc">
+                            <Grid Width="380">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="Assets/OtherApps/meet-me-here.png" Grid.Column="0"/>
+                                <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
+                                    <TextBlock Text="Meet Me Here" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap" />
+                                    <TextBlock Text="Send a map of your location to your friends" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+                    </Grid>
+                </ScrollViewer>
+            </phone:PanoramaItem>
+
             <phone:PanoramaItem Header="{Binding Path=LocalizedResources.AboutHeader, Source={StaticResource LocalizedStrings}}" Margin="0,-40,0,0">
-                <ScrollViewer Grid.Row="1" Margin="0,-40,0,0">
-                <Grid x:Name="AboutPanel">
+                <Grid x:Name="AboutPanel" Grid.Row="1" Margin="2,-36,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="200" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="200" />
                         <RowDefinition Height="200" />
                     </Grid.RowDefinitions>
@@ -94,14 +192,11 @@
                                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                                TextWrapping="Wrap" Margin="12, 0, 0, 0"/>
 
-                    <Button Name="TwitterButton" Click="TwitterButton_Click" Background="Red" BorderThickness="0" Grid.Column="0" Grid.Row="1">
-                        <StackPanel>
-                            <Image Source="Assets/About/appbar.social.twitter.png" MaxHeight="120" />
-                            <TextBlock Text="{Binding Path=LocalizedResources.AboutButtonTwitter, Source={StaticResource LocalizedStrings}}" />
-                        </StackPanel>
-                    </Button>
+                    <TextBlock Name="VersionTextBox" Text="v1.0.0.0"
+                               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                               TextWrapping="Wrap" Margin="12, 6, 0, 6"/>
 
-                    <Button Name="ReviewButton" Click="ReviewButton_Click" Background="OrangeRed" BorderThickness="0" Grid.Column="1" Grid.Row="1">
+                    <Button Name="ReviewButton" Click="ReviewButton_Click" Background="OrangeRed" BorderThickness="0" Grid.Column="1" Grid.Row="2">
                         <StackPanel>
                             <Image Source="Assets/About/appbar.message.smiley.png" MaxHeight="120" />
                             <TextBlock Text="{Binding Path=LocalizedResources.AboutButtonReview, Source={StaticResource LocalizedStrings}}" />
@@ -115,23 +210,28 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Name="StoreButton" Click="StoreButton_Click" Background="Green" BorderThickness="0" Grid.Column="1" Grid.Row="2">
+                    <Button Name="PinButton" Click="PinButton_Click" Background="Red" BorderThickness="0" Grid.Column="0" Grid.Row="3">
                         <StackPanel>
-                            <Image Source="Assets/About/appbar.marketplace.png" MaxHeight="120" />
-                            <TextBlock Text="{Binding Path=LocalizedResources.AboutButtonStore, Source={StaticResource LocalizedStrings}}" />
+                            <Image Source="Assets/About/appbar.pin.png" MaxHeight="120" />
+                            <TextBlock Text="{Binding Path=LocalizedResources.AboutButtonPin, Source={StaticResource LocalizedStrings}}" />
                         </StackPanel>
                     </Button>
 
-                    <Button Name="CreditsButton" Click="CreditsButton_Click" Background="Blue" BorderThickness="0" Grid.Column="0" Grid.Row="3">
+                    <Button Name="CreditsButton" Click="CreditsButton_Click" Background="Blue" BorderThickness="0" Grid.Column="1" Grid.Row="3">
                         <StackPanel>
                             <Image Source="Assets/About/appbar.companioncube.png" MaxHeight="120" />
                             <TextBlock Text="{Binding Path=LocalizedResources.AboutButtonCredits, Source={StaticResource LocalizedStrings}}" />
                         </StackPanel>
                     </Button>
                 </Grid>
-                </ScrollViewer>
             </phone:PanoramaItem>
         </phone:Panorama>
+
+        <!-- Feedback overlay -->
+        <ctrl:FeedbackOverlay x:Name="FeedbackOverlay"
+                              FeedbackTo="alexmartin9999@hotmail.com"
+                              ApplicationName="Your Music Shuffled"
+                              CompanyName="Nocturnal Tendencies" Margin="0,-2,0,2"/>
 
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
     </Grid>
