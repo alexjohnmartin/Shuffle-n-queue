@@ -83,14 +83,14 @@ namespace Shuffle_n_queue
                 var outerStackPanel = new StackPanel {
                         Orientation = System.Windows.Controls.Orientation.Horizontal, 
                         Margin = new Thickness(12,2,0,4), 
-                        Height = 105, 
+                        Height = 95, 
                         Width = 432, 
                         Tag = song, 
                         Name = playlist.Name
                 };
                 outerStackPanel.Tap += SongPanel_Tap;
 
-                var rectangle = new Border { BorderThickness = new Thickness(1), Width = 10, Height = 99, BorderBrush = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 199, 0)), Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 199, 0)) };
+                var rectangle = new Border { BorderThickness = new Thickness(1), Width = 10, Height = 90, BorderBrush = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 199, 0)), Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 199, 0)) };
                 outerStackPanel.Children.Add(rectangle);
 
                 var innerStackPanel = new StackPanel { Width = 311, Margin = new Thickness(12,-7,0,0) };
@@ -98,7 +98,8 @@ namespace Shuffle_n_queue
                     Text = song.Name, 
                     Margin = new Thickness(0), 
                     Style = (System.Windows.Style)Resources["PhoneTextExtraLargeStyle"],
-                    FontSize = (double)Resources["PhoneFontSizeLarge"]
+                    FontSize = (double)Resources["PhoneFontSizeLarge"],
+                    Foreground = new SolidColorBrush(Colors.Black),
                 };
                 innerStackPanel.Children.Add(nameTextBlock);
 
@@ -107,6 +108,7 @@ namespace Shuffle_n_queue
                     Text = song.Artist.Name,
                     Margin = new Thickness(0, -2, 10, 0),
                     Style = (System.Windows.Style)Resources["PhoneTextSubtleStyle"],
+                    Foreground = new SolidColorBrush(Colors.Black),
                 };
                 innerStackPanel.Children.Add(artistTextBlock);
 
@@ -115,6 +117,7 @@ namespace Shuffle_n_queue
                     Text = song.Album.Name,
                     Margin = new Thickness(0, -2, 10, 0),
                     Style = (System.Windows.Style)Resources["PhoneTextSubtleStyle"],
+                    Foreground = new SolidColorBrush(Colors.Black),
                 };
                 innerStackPanel.Children.Add(albumTextBlock);
 

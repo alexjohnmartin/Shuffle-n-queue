@@ -121,6 +121,8 @@
     <Content Include="Assets\OtherApps\toonify.png" />
     <Content Include="Assets\OtherApps\trail-mapper.png" />
     <Content Include="Assets\OtherApps\your-music-shuffled.png" />
+    <Content Include="Assets\sheet_music.png" />
+    <Content Include="Assets\sheet_music_2_by_Kerbi_stock.jpg" />
     <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
