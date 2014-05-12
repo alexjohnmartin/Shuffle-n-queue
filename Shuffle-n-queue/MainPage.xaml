@@ -22,7 +22,7 @@
                 <ImageBrush ImageSource="/Shuffle_n_queue;component/Assets/PanoramaBackground.png"/>
             </phone:Panorama.Background>-->
 
-            <phone:PanoramaItem Header="All songs" Margin="0,-40,0,0">
+            <phone:PanoramaItem Header="{Binding Path=LocalizedResources.AllSongsHeader, Source={StaticResource LocalizedStrings}}" Margin="0,-40,0,0">
                 <phone:LongListSelector Margin="0,-38,0,2" ItemsSource="{Binding SongItems}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
@@ -97,8 +97,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Assets/OtherApps/toonify.png" Grid.Column="0"/>
                                 <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
-                                    <TextBlock Text="Toonify" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
-                                    <TextBlock Text="Make comics with your camera phone" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.OtherAppsToonifyName, Source={StaticResource LocalizedStrings}}" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.OtherAppsToonifyDescription, Source={StaticResource LocalizedStrings}}" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Grid>
                         </Button>
@@ -114,8 +114,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Assets/OtherApps/trail-mapper.png" Grid.Column="0"/>
                                 <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
-                                    <TextBlock Text="Trail Mapper" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap" />
-                                    <TextBlock Text="Record your favorite trails" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.OtherAppsTrailMapperName, Source={StaticResource LocalizedStrings}}" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.OtherAppsTrailMapperDescription, Source={StaticResource LocalizedStrings}}" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Grid>
                         </Button>
@@ -131,8 +131,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Assets/OtherApps/your-music-shuffled.png" Grid.Column="0"/>
                                 <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
-                                    <TextBlock Text="Your Music Shuffled" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap" />
-                                    <TextBlock Text="No-frills, no distractions music player" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.OtherAppsYourMusicShuffledName, Source={StaticResource LocalizedStrings}}" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.OtherAppsYourMusicShuffledDescription, Source={StaticResource LocalizedStrings}}" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Grid>
                         </Button>-->
@@ -148,8 +148,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Assets/OtherApps/calendar-tile.png" Grid.Column="0"/>
                                 <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
-                                    <TextBlock Text="Calendar Tile" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap" />
-                                    <TextBlock Text="Put a calendar on your home screen" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.OtherAppsCalendarTileName, Source={StaticResource LocalizedStrings}}" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.OtherAppsCalendarTileDescription, Source={StaticResource LocalizedStrings}}" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Grid>
                         </Button>
@@ -165,8 +165,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Assets/OtherApps/meet-me-here.png" Grid.Column="0"/>
                                 <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
-                                    <TextBlock Text="Meet Me Here" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap" />
-                                    <TextBlock Text="Send a map of your location to your friends" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.OtherAppsMeetMeHereName, Source={StaticResource LocalizedStrings}}" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.OtherAppsMeetMeHereDescription, Source={StaticResource LocalizedStrings}}" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Grid>
                         </Button>

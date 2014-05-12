@@ -155,4 +155,37 @@
   <data name="OtherAppsHeader" xml:space="preserve">
     <value>Other apps</value>
   </data>
+  <data name="AllSongsHeader" xml:space="preserve">
+    <value>All songs</value>
+  </data>
+  <data name="OtherAppsCalendarTileDescription" xml:space="preserve">
+    <value>Put a calendar on your home screen</value>
+  </data>
+  <data name="OtherAppsCalendarTileName" xml:space="preserve">
+    <value>Calendar Tile</value>
+  </data>
+  <data name="OtherAppsMeetMeHereDescription" xml:space="preserve">
+    <value>Send a map of your location to your friends</value>
+  </data>
+  <data name="OtherAppsMeetMeHereName" xml:space="preserve">
+    <value>Meet Me Here</value>
+  </data>
+  <data name="OtherAppsToonifyDescription" xml:space="preserve">
+    <value>Make comics with your camera phone</value>
+  </data>
+  <data name="OtherAppsToonifyName" xml:space="preserve">
+    <value>Toonify</value>
+  </data>
+  <data name="OtherAppsTrailMapperDescription" xml:space="preserve">
+    <value>Record, map and share your favorite trails</value>
+  </data>
+  <data name="OtherAppsTrailMapperName" xml:space="preserve">
+    <value>Trail Mapper</value>
+  </data>
+  <data name="OtherAppsYourMusicShuffledDescription" xml:space="preserve">
+    <value>No-frills, no distractions music player</value>
+  </data>
+  <data name="OtherAppsYourMusicShuffledName" xml:space="preserve">
+    <value>Your Music Shuffled</value>
+  </data>
 </root>
