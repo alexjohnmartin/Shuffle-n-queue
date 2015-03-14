@@ -27,6 +27,7 @@ namespace Shuffle_n_queue
         {
             InitializeComponent();
             DataContext = App.ViewModel;
+            TiltEffect.TiltableItems.Add(typeof(TiltStackPanel));
         }
         
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -77,7 +78,7 @@ namespace Shuffle_n_queue
             BugSenseHandler.Instance.LeaveBreadCrumb("MainPage - adding playlist to panorama");
             var item = new PanoramaItem { Header = playlist.Name, Margin = new Thickness(0, -40, 0, 0) };
             var scroller = new ScrollViewer { Margin = new Thickness(0, -38, 0, 2) };
-            var listStackPanel = new StackPanel { Orientation = System.Windows.Controls.Orientation.Vertical };
+            var listStackPanel = new TiltStackPanel { Orientation = System.Windows.Controls.Orientation.Vertical };
             foreach (var song in playlist.Songs)
             { 
                 var outerStackPanel = new StackPanel {
@@ -86,7 +87,8 @@ namespace Shuffle_n_queue
                         Height = 95, 
                         Width = 432, 
                         Tag = song, 
-                        Name = playlist.Name
+                        Name = playlist.Name,
+                        //TODO: toolkit:TiltEffect.IsTiltEnabled="True"
                 };
                 outerStackPanel.Tap += SongPanel_Tap;
 
@@ -249,4 +251,7 @@ namespace Shuffle_n_queue
             PinButton.Background = new SolidColorBrush((System.Windows.Media.Color)Application.Current.Resources["PhoneAccentColor"]);
         }
     }
+
+    public class TiltStackPanel : StackPanel
+    { }
 }

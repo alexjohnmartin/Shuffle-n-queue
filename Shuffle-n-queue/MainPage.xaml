@@ -32,7 +32,7 @@
                 <phone:LongListSelector Margin="0,-38,0,2" ItemsSource="{Binding SongItems}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="95" Width="432" Name="SongPanel" Tap="SongPanel_Tap" Tag="{Binding}">
+                            <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="95" Width="432" Name="SongPanel" Tap="SongPanel_Tap" Tag="{Binding}" toolkit:TiltEffect.IsTiltEnabled="True">
                                 <Border BorderThickness="1" Width="10" Height="90" BorderBrush="#FFFFC700" Background="#FFFFC700"/>
                                 <StackPanel Width="311" Margin="12,-7,0,0">
                                     <TextBlock Text="{Binding Name}" Margin="0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Black" />
